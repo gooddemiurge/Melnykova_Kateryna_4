@@ -105,14 +105,57 @@ public class City
 		}
 	}
 
-	public int average_capacity() 
+	public void average_capacity() 
 	{
-		int sum = 0;
+		int cinema_sum = 0;
+		int cinema_count = 0;
+		int hotel_sum = 0;
+		int hotel_count = 0;
+		int public_sum = 0;
+		int public_count = 0;
+		int residental_sum = 0;
+		int residental_count = 0;
 		foreach (Building b in Buildings)
 		{
-			sum += b.capacity();
-		}
+			if (b is Cinema) 
+			{ 
+				cinema_sum += b.capacity();
+				cinema_count += 1;
+			}
+			if (b is Hotel)
+			{
+				hotel_sum += b.capacity();
+				hotel_count += 1;
+			}
 
-		return sum / Buildings.Count;
+			if (b is PublicBuilding)
+			{
+				public_sum += b.capacity();
+				public_count += 1;
+			}
+
+			if (b is ResidentialBuilding)
+			{
+				residental_sum += b.capacity();
+				residental_count += 1;
+			}
+
+		}
+		if (cinema_count != 0)
+		{
+			Console.WriteLine("Cередня ємність кінотеатрів: " + cinema_sum / cinema_count);
+		}
+		if (public_count != 0)
+		{
+			Console.WriteLine("Cередня ємність громадських будівель: " + public_sum/public_count);
+		}
+		if (residental_count != 0)
+		{
+			Console.WriteLine("Cередня ємність всіх житлових будівель: " + residental_sum/residental_count);
+		}
+		if (hotel_count != 0)
+		{
+			Console.WriteLine("Cередня ємність всіх готелів: " + hotel_sum/hotel_count);
+		}
 	}
 }

@@ -39,7 +39,7 @@ namespace Lab_4
             misto.show_building();
             misto.add_building(house);
             misto.show_building();
-            Console.WriteLine(misto.average_capacity());
+            misto.average_capacity();
         }
     }
 }
