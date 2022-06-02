@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 
 public interface IRent
@@ -61,19 +62,10 @@ public class ResidentialBuilding: Building, IRent
 	}
 }
 
-public class Cinema: Building, ITicket
+public class Cinema: PublicBuilding, ITicket
 {
 	public Cinema(string date, int square, int floors) : base(date, square, floors) { }
 	public int Price { get; set; }
-
-	public int CountPrice(int price, int customer_age)
-	{
-		if (customer_age <= 6 || customer_age >= 60)
-		{
-			return (price*8)/10;
-		}
-		return price;
-	}
 
 	public override int capacity()
 	{
@@ -82,17 +74,45 @@ public class Cinema: Building, ITicket
 
 }
 
-public class Hotel: Building, IRent
+public class Hotel: ResidentialBuilding, IRent
 {
 	public Hotel(string date, int square, int floors) : base(date, square, floors) { }
-
-	public int CountRent(int price_per_room, int number_of_rooms, int days) 
-	{
-		return price_per_room * number_of_rooms * days;
-	}
 
 	public override int capacity()
 	{
 		return (this.Square * this.Floors) / 7;
+	}
+}
+
+public class City 
+{
+	public List<Building> Buildings;
+	public City(List<Building> building_list) 
+	{
+		this.Buildings = building_list;
+	}
+
+	public void add_building(Building building) 
+	{
+		Buildings.Add(building);
+	}
+
+	public void show_building()
+	{
+		foreach (Building b in Buildings)
+		{
+			Console.WriteLine(b);
+		}
+	}
+
+	public int average_capacity() 
+	{
+		int sum = 0;
+		foreach (Building b in Buildings)
+		{
+			sum += b.capacity();
+		}
+
+		return sum / Buildings.Count;
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Lab_4
 {
@@ -32,6 +33,13 @@ namespace Lab_4
             Console.WriteLine("Дата побудови: " + house.Date);
             Console.WriteLine("Вартiсть оренди: " + house.CountRent(150, 50, 30));
             Console.WriteLine("Мiсткiсть: " + house.capacity());
+
+            List<Building> building_list = new List<Building> { florencia, California, museum};
+            City misto = new City(building_list);
+            misto.show_building();
+            misto.add_building(house);
+            misto.show_building();
+            Console.WriteLine(misto.average_capacity());
         }
     }
 }
